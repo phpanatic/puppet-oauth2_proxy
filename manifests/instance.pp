@@ -1,9 +1,11 @@
-# == Define: oauth2_proxy::instance
+# @summary Defined type to configure a oauth2_proxy instance
 #
-define oauth2_proxy::instance(
+# @param config Hash with configuration parameter for oauth2_proxy
+#   Details can be founce here https://oauth2-proxy.github.io/oauth2-proxy/docs/6.1.x/configuration/overview
+#
+define oauth2_proxy::instance (
   Hash    $config,
 ) {
-
   file { "/etc/oauth2_proxy/${title}.conf":
     ensure  => file,
     owner   => $oauth2_proxy::user,

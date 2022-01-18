@@ -1,0 +1,14 @@
+vendor/
+pkg/
+spec/
+tests/
+.yardopts
+.pmtignore
+.gitignore
+.mdl_style.rb
+.mdlrc
+.pre-commimt-config.yaml
+.rspec
+.yamllint.yaml
+azure-pipelines.yaml
+**/.gitkeep

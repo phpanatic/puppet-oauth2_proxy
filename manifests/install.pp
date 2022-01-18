@@ -1,6 +1,5 @@
-# == Class: oauth2_proxy::install
-#
-# This class should be considered private.
+# @summary Class to install and configure an oauth2_proxy
+#   This class should be considered private.
 #
 class oauth2_proxy::install {
   if $caller_module_name != $module_name {
@@ -11,12 +10,12 @@ class oauth2_proxy::install {
 
   include ::archive
   archive { $oauth2_proxy::tarball_name:
-    ensure        => present,
-    source        => "${oauth2_proxy::source_base_url}/${oauth2_proxy::tarball_name}",
-    path          => "${oauth2_proxy::install_root}/${tarball_name}",
-    extract       => true,
-    extract_path  => $oauth2_proxy::install_root,
-    user          => $oauth2_proxy::user,
+    ensure       => present,
+    source       => "${oauth2_proxy::source_base_url}/${oauth2_proxy::tarball_name}",
+    path         => "${oauth2_proxy::install_root}/${oauth2_proxy::tarball_name}",
+    extract      => true,
+    extract_path => $oauth2_proxy::install_root,
+    user         => $oauth2_proxy::user,
   }
 
   file { $oauth2_proxy::install_root:
@@ -44,7 +43,7 @@ class oauth2_proxy::install {
     ensure => directory,
     owner  => $oauth2_proxy::user,
     group  => $oauth2_proxy::group,
-    mode   => '0644'
+    mode   => '0644',
   }
 
   case $oauth2_proxy::provider {
