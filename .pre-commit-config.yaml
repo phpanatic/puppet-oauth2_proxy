@@ -1,0 +1,28 @@
+---
+fail_fast: false
+
+repos:
+  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+    rev:  'v3.4.0'
+    hooks:
+      - id: 'trailing-whitespace'
+        exclude: 'templates/estreamer.conf.erb'
+
+  - repo: 'https://github.com/adrienverge/yamllint'
+    rev:  'v1.26.0'
+    hooks:
+      - id: 'yamllint'
+
+  - repo: 'https://-svc-AzureDevOps_CMC:7u5llddtwj7zosqzydswssf5vkcgoftgxyx6ruafsl2cmvspk3wq@dev.azure.com/ConclusionMC/ORG-CMC/_git/pre-commit-cmc_hooks'
+    rev:  'v1.0.1'
+    hooks:
+      - id: 'epp-validate'
+      - id: 'erb-validate'
+      - id: 'hiera-sort'
+        exclude: '(azure-pipelines|hiera)\.y[a]?ml$'
+      - id: 'markdown-lint'
+      - id: 'metadata-json-lint'
+      - id: 'puppet-lint'
+      - id: 'puppet-rspec'
+      - id: 'puppet-strings'
+      - id: 'puppet-validate'

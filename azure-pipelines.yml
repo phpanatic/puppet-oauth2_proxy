@@ -1,0 +1,21 @@
+---
+resources:
+  repositories:
+    - repository: 'org_cmc_pipeline_templates'
+      type:       'git'
+      name:       'ORG-CMC/devops-pipeline-templates'
+      ref:        'refs/tags/v9.1.1'
+
+trigger:
+  branches:
+    include:
+      - 'master'
+
+stages:
+  - template: 'stages/puppet_validation.yml@org_cmc_pipeline_templates'
+    parameters:
+      install_bundle:       false
+      validation_framework: 'pre-commit'
+  - template: 'stages/puppet_module_release.yml@org_cmc_pipeline_templates'
+    parameters:
+      install_bundle: false
