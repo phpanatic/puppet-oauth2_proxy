@@ -1,5 +1,5 @@
 {
-  "name": "VeepsHosting-oauth2_proxy",
+  "name": "veepshosting-oauth2_proxy",
   "version": "0.0.1",
   "author": "Grant Davies <grant at veepshosting dot com>",
   "summary": "manages the oauth2_proxy reverse proxy with oauth authentication",
