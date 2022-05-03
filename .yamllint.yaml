@@ -1,0 +1,26 @@
+---
+rules:
+  braces:                  'enable'
+  brackets:                'enable'
+  colons:                  'disable'
+  commas:                  'enable'
+  comments:
+    level: 'error'
+  comments-indentation:
+    level: 'error'
+  document-end:            'disable'
+  document-start:          'enable'
+  empty-lines:             'enable'
+  empty-values:            'enable'
+  hyphens:                 'enable'
+  indentation:             'enable'
+  key-duplicates:          'enable'
+  key-ordering:            'disable'
+  line-length:             'disable'
+  new-line-at-end-of-file: 'enable'
+  new-lines:               'enable'
+  octal-values:            'disable'
+  quoted-strings:          'enable'
+  trailing-spaces:         'enable'
+  truthy:
+    level: 'error'

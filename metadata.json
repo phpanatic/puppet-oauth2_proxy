@@ -1,12 +1,12 @@
 {
-  "name": "jhoblitt-oauth2_proxy",
+  "name": "cmc-oauth2_proxy",
   "version": "1.4.2",
   "author": "Joshua Hoblitt <josh@hoblitt.com>",
   "summary": "manages the oauth2_proxy reverse proxy with oauth authentication",
   "license": "Apache-2.0",
-  "source": "https://github.com/jhoblitt/puppet-oauth2_proxy.git",
-  "project_page": "https://github.com/jhoblitt/puppet-oauth2_proxy",
-  "issues_url": "https://github.com/jhoblitt/puppet-oauth2_proxy/issues",
+  "source": "https://dev.azure.com/ConclusionMC/ORG-CMC/_git/puppet-oauth2_proxy.git",
+  "project_page": "https://dev.azure.com/ConclusionMC/ORG-CMC/_git/puppet-oauth2_proxy",
+  "issues_url": "https://dev.azure.com/ConclusionMC/ORG-CMC/_git/puppet-oauth2_proxy/issues",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",

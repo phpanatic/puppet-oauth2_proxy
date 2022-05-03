@@ -1,29 +1,27 @@
-# == Define: oauth2_proxy::instance
+# @summary Defined type to configure a oauth2_proxy instance
 #
-define oauth2_proxy::instance(
-  $config,
-  $manage_service = $::oauth2_proxy::params::manage_service,
-  $provider       = $::oauth2_proxy::params::provider,
+# @param config Hash with configuration parameter for oauth2_proxy
+#   Details can be founce here https://oauth2-proxy.github.io/oauth2-proxy/docs/6.1.x/configuration/overview
+#
+define oauth2_proxy::instance (
+  Hash    $config,
 ) {
-  validate_bool($manage_service)
-  validate_hash($config)
-
   file { "/etc/oauth2_proxy/${title}.conf":
     ensure  => file,
-    owner   => $::oauth2_proxy::user,
-    group   => $::oauth2_proxy::group,
+    owner   => $oauth2_proxy::user,
+    group   => $oauth2_proxy::group,
     mode    => '0440',
     content => template("${module_name}/oauth2_proxy.conf.erb"),
   }
 
   file { "/var/log/oauth2_proxy/${title}.log":
     ensure => file,
-    owner  => $::oauth2_proxy::user,
-    group  => $::oauth2_proxy::group,
+    owner  => $oauth2_proxy::user,
+    group  => $oauth2_proxy::group,
     mode   => '0644',
   }
 
-  case $provider {
+  case $oauth2_proxy::provider {
     'debian': {
       file { "/etc/init.d/oauth2_proxy@${title}":
         ensure  => file,
@@ -45,14 +43,14 @@ define oauth2_proxy::instance(
     default: {}
   }
 
-  if $manage_service {
-    case $provider {
+  if $oauth2_proxy::manage_service {
+    case $oauth2_proxy::provider {
       'debian': {
         service { "oauth2_proxy@${title}":
           ensure    => 'running',
           enable    => true,
           subscribe => File["/etc/init.d/oauth2_proxy@${title}", "/etc/oauth2_proxy/${title}.conf"],
-          provider  => $provider,
+          provider  => $oauth2_proxy::provider,
         }
       }
       'upstart': {
@@ -60,7 +58,7 @@ define oauth2_proxy::instance(
           ensure    => 'running',
           enable    => true,
           subscribe => File["/etc/init/oauth2_proxy@${title}.conf", "/etc/oauth2_proxy/${title}.conf"],
-          provider  => $provider,
+          provider  => $oauth2_proxy::provider,
         }
       }
       'systemd': {
@@ -68,7 +66,7 @@ define oauth2_proxy::instance(
           ensure    => 'running',
           enable    => true,
           subscribe => File["/etc/oauth2_proxy/${title}.conf"],
-          provider  => $provider,
+          provider  => $oauth2_proxy::provider,
         }
       }
       default: {}
