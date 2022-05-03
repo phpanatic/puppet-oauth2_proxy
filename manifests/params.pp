@@ -8,7 +8,7 @@ class oauth2_proxy::params {
   $user             = 'oauth2'
   $group            = $user
   $install_root     = '/opt/oauth2_proxy'
-  $version          = '6.1.1'
+  $version          = '7.2.1'
   $source_base_url  = "https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v${version}"
   $tarball_name     = "oauth2-proxy-v${version}.linux-amd64.tar.gz"
   $provider         = 'systemd'
