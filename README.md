@@ -1,6 +1,3 @@
-# Fork from [https://github.com/jhoblitt/puppet-oauth2_proxy.git](https://github.com/jhoblitt/puppet--oauth2_proxy.git)
-# Includes a number of changes for Puppet6+ syntax from [https://github.com/Fabian1976/puppet-oauth2_proxy/](https://github.com/Fabian1976/puppet-oauth2_proxy/)
-
 Puppet oauth2_proxy Module
 ==========================
 
@@ -82,7 +79,7 @@ include ::oauth2_proxy
 
 ```puppet
 class { '::oauth2_proxy':
-  source   => 'https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v7.2.1/oauth2_proxy-7.2.1.linux-amd64.go1.4.2.tar.gz',
+  source   => 'https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v7.3.0/oauth2_proxy-7.3.0.linux-amd64.go1.4.2.tar.gz',
   checksum => '950e08d52c04104f0539e6945fc42052b30c8d1b',
 }
 
@@ -115,7 +112,7 @@ class { '::oauth2_proxy':
   group        => 'oauth2',
   manage_group => true,
   install_root => '/opt/oauth2_proxy',
-  source       => 'https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v7.2.1/oauth2-proxy-v7.2.1.linux-amd64.tar.gz',
+  source       => 'https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v7.3.0/oauth2-proxy-v7.3.0.linux-amd64.tar.gz',
   checksum     => '625ce0f0b23bc5791d1b9a64d2d9a7349a4f94c12f3eea8e8f05055067e6c55a',
 }
 ```
@@ -261,3 +258,8 @@ See Also
 --------
 
 * [oauth2_proxy](https://github.com/oauth2-proxy/oauth2_proxy)
+
+
+Fork from [https://github.com/jhoblitt/puppet-oauth2_proxy.git](https://github.com/jhoblitt/puppet--oauth2_proxy.git)
+
+Includes a number of changes for Puppet6+ syntax from [https://github.com/Fabian1976/puppet-oauth2_proxy/](https://github.com/Fabian1976/puppet-oauth2_proxy/)

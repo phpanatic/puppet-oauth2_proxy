@@ -13,7 +13,7 @@
 # @param install_root The path where the proxy will be installed
 #   Default: '/opt/oauth2_proxy'
 # @param version The version of oauth2_proxy to install
-#   Default: '6.1.1'
+#   Default: '7.3.0'
 # @param source_base_url The base URL where the software tarball can be found
 #   Default: "https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v${version}"
 # @param tarball_name The name of the tarball
@@ -28,20 +28,44 @@
 #   Default: '/usr/lib/systemd/system'
 #
 class oauth2_proxy (
-  Boolean          $manage_user     = $oauth2_proxy::params::manage_user,
-  Boolean          $manage_group    = $oauth2_proxy::params::manage_group,
-  Boolean          $manage_service  = $oauth2_proxy::params::manage_service,
-  String           $user            = $oauth2_proxy::params::user,
-  String           $group           = $oauth2_proxy::params::group,
-  Stdlib::Unixpath $install_root    = $oauth2_proxy::params::install_root,
-  String           $version         = $oauth2_proxy::params::version,
-  Stdlib::HTTPUrl  $source_base_url = $oauth2_proxy::params::source_base_url,
-  String           $tarball_name    = $oauth2_proxy::params::tarball_name,
-  String           $provider        = $oauth2_proxy::params::provider,
-  Stdlib::Unixpath $shell           = $oauth2_proxy::params::shell,
-  Stdlib::Unixpath $systemd_path    = $oauth2_proxy::params::systemd_path,
+  String           $group           = 'oauth2',
+  Stdlib::Unixpath $install_root    = '/opt/oauth2_proxy',
   Optional[Hash]   $instances       = undef,
-) inherits oauth2_proxy::params {
+  Boolean          $manage_group    = true,
+  Boolean          $manage_service  = true,
+  Boolean          $manage_user     = true,
+  String           $provider        = 'systemd',
+  Stdlib::HTTPUrl  $source_base_url = "https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v${version}",
+  String           $tarball_name    = "oauth2-proxy-v${version}.linux-amd64.tar.gz",
+  String           $user            = 'oauth2',
+  String           $version         = '7.3.0',
+) {
+
+  # in theory, this module should work on any linux distro that uses systemd
+  # but it has only been tested on el7
+  case $facts[os][family] {
+    'RedHat': {
+      $shell = '/sbin/nologin'
+      $systemd_path = '/usr/lib/systemd/system'
+    }
+    'Debian': {
+      $shell = '/usr/sbin/nologin'
+      $systemd_path = '/etc/systemd/system'
+    }
+    default: {
+      fail("Module ${module_name} is not supported on operatingsystem ${facts[os][family]}")
+    }
+  }
+
+  # bit.ly does not provide x86 builds
+  case $facts[os][architecture] {
+    'x86_64': {}
+    'amd64': {}
+    default: {
+      fail("Module ${module_name} is not supported on architecture ${facts[os][architecture]}")
+    }
+  }
+
   if $manage_user {
     user { $user:
       gid    => $group,
@@ -57,8 +81,11 @@ class oauth2_proxy (
       system => true,
     }
   }
+
   class { 'oauth2_proxy::install': }
+
   if $instances {
     create_resources('oauth2_proxy::instance', $instances)
   }
+
 }

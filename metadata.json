@@ -1,6 +1,6 @@
 {
   "name": "veepshosting-oauth2_proxy",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Grant Davies <grant at veepshosting dot com>",
   "summary": "manages the oauth2_proxy reverse proxy with oauth authentication",
   "license": "Apache-2.0",
@@ -39,7 +39,8 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "20.04"
+        "20.04",
+        "22.04"
       ]
     }
   ],

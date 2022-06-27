@@ -36,14 +36,14 @@ class oauth2_proxy::install {
     ensure => directory,
     owner  => $oauth2_proxy::user,
     group  => $oauth2_proxy::group,
-    mode   => '0644',
+    mode   => '0755',
   }
 
   file { '/var/log/oauth2_proxy':
     ensure => directory,
     owner  => $oauth2_proxy::user,
     group  => $oauth2_proxy::group,
-    mode   => '0644',
+    mode   => '0775',
   }
 
   case $oauth2_proxy::provider {
