@@ -35,10 +35,10 @@ class oauth2_proxy (
   Boolean          $manage_service  = true,
   Boolean          $manage_user     = true,
   String           $provider        = 'systemd',
+  String           $version         = '7.3.0',
   Stdlib::HTTPUrl  $source_base_url = "https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v${version}",
   String           $tarball_name    = "oauth2-proxy-v${version}.linux-amd64.tar.gz",
   String           $user            = 'oauth2',
-  String           $version         = '7.3.0',
 ) {
 
   # in theory, this module should work on any linux distro that uses systemd
