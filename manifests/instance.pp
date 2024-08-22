@@ -78,7 +78,10 @@ define oauth2_proxy::instance (
         service { "oauth2_proxy@${title}":
           ensure    => $service_ensure,
           enable    => true,
-          subscribe => File["/etc/oauth2_proxy/${title}.conf"],
+          require => [
+            File["/etc/oauth2_proxy/${title}.conf"],
+            File["${oauth2_proxy::systemd_path}/oauth2_proxy@.service"]
+          ],
           provider  => $oauth2_proxy::provider,
         }
       }
